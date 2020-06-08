@@ -1,27 +1,33 @@
-# LpbdFront
+<h3> Projeto Antena </h3>
+<h4> Angular | Node </h4>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
+<h3>Disciplinas</h3>
+<hr>
+<h4> Laboratório de Desenvolvimento de banco de dados </h4>
 
-## Development server
+<h3> Time </h3>
+<ul>
+<br>
+<li> Leonardo Aleixo da Silva </li>
+<br>
+<li> Sandro Toline de Oliveira Júnior </li>
+<br>
+<li> Douglas Hiromi Nishiama </li>
+<br>
+<li> Julio Cesar Silva Rangel </li>
+<br>
+</ul>
+<h2> Objetivo </h2>
+<h5> Este projeto tem por objetivo criar um produto final que seja capaz de 
+cadastrar dados de uma pessoa e suas tarefas mensais, além de aplicar o SCRUM em seu desenvolvimento./h5>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+<h3>- Requisitos necessários para o funcionamento do código </h3>
 
-## Code scaffolding
+<ul>
+  <li> Node 10+ </li>
+  <li> Angular 7+</li>
+  <li> Visual Studio Code (opcional)</li>
+  
+</ul>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+O projeto automáticamente ao ser executado baixará todas dependências.
