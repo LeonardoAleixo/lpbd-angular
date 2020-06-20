@@ -1,0 +1,197 @@
+<div style="width: 1024px;margin: 0 auto;" *ngIf="modo == 'cadastro'">
+
+    <button class="uk-button uk-button-secondary" (click)="trocarModo();"
+        style="width: 200px;margin-top: 20px;;">Calendário</button>
+    <br>
+    <button class="uk-button uk-button-primary" (click)="adicionarNovo();" uk-toggle="target: #modal-close-default"
+        style="width: 200px;margin-top: 20px;;">Adicionar tarefa</button>
+
+    <table class="uk-table">
+        <caption>Lista de Tarefas</caption>
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Data de início</th>
+                <th>Data de término</th>
+                <th>Data prevista fim</th>
+                <th style="text-align: center;">Importância</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tarefa of listaTarefas;" (click)="selecionarTarefa(tarefa)" uk-toggle="target: #modal-close-default">
+                <td> {{tarefa.titulo}}</td>
+                <td>{{transformarData(tarefa.dataInicio) | date : 'yyyy-MM-dd'}}</td>
+                <td>{{transformarData(tarefa.dataFim) | date : 'yyyy-MM-dd'}}</td>
+                <td>{{transformarData(tarefa.dataPrevistaFim) | date : 'yyyy-MM-dd'}}
+                <td style="text-align: center;">
+                    <span *ngIf="tarefa.importancia == 1" style='font-size:20px;color: red'>
+                        &#9679;</span>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- This is the modal with the default close button -->
+<div id="modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <div uk-grid>
+            <div class="uk-width-1-2@s">
+                <label>Título</label>
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" placeholder="Título" [(ngModel)]="objectTarefa.titulo">
+                </div>
+            </div>
+            <div class="uk-width-1-2@s">
+                <label>Início</label>
+                <div class="uk-margin uk-form-small">
+                    <input type="date" class="uk-input" [(ngModel)]="objectTarefa.dataInicio">
+                </div>
+            </div>
+            <div class="uk-width-1-2@s">
+                <label>Fim</label>
+                <div class="uk-margin uk-form-small">
+                    <input type="date" class="uk-input" [(ngModel)]="objectTarefa.dataFim">
+                </div>
+            </div>
+
+            <div class="uk-width-1-2@s">
+                <label>Previsão</label>
+                <div class="uk-margin uk-form-small">
+                    <input type="date" class="uk-input" [(ngModel)]="objectTarefa.dataPrevistaFim">
+                </div>
+            </div>
+
+            <div class="uk-width-1-2@s">
+                <label>Importância</label>
+                <div class="uk-margin uk-form-small">
+                    <select class="uk-select" [(ngModel)]="objectTarefa.importancia">
+                        <option value="1">
+                            Muito importante
+                        </option>
+                        <option value="2">
+                            Não tao importante
+                        </option>
+                        <option value="2">
+                            Irrelevante
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="uk-width-1-2@s"></div>
+            <div class="uk-width-1-2@s">
+                <button class="uk-button uk-button-primary uk-button-small" 
+                style="width: 200px;"
+                (click)="validarDados()">Salvar</button>
+            </div>
+            <div class="uk-width-1-2@s">
+                <button class="uk-button uk-button-danger uk-button-small"
+                style="width: 200px;"
+                (click)="remover()">Voltar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="modo == 'calendar'" style="width: 1024px;margin: 0 auto;padding-top: 20px;" >
+    <div style="text-align: center;">
+        <button class="uk-button uk-button-secondary" (click)="trocarModo();"
+        style="width: 200px;margin-top: 20px;;">Cadastro</button>
+    </div>
+    
+    <div class="row text-center">
+        <div class="col-md-4">
+          <div class="btn-group">
+            <div
+              class="btn btn-primary"
+              mwlCalendarPreviousView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()"
+            >
+              Previous
+            </div>
+            <div
+              class="btn btn-outline-secondary"
+              mwlCalendarToday
+              [(viewDate)]="viewDate"
+            >
+              Today
+            </div>
+            <div
+              class="btn btn-primary"
+              mwlCalendarNextView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()"
+            >
+              Next
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+        </div>
+        <div class="col-md-4">
+          <div class="btn-group">
+            <div
+              class="btn btn-primary"
+              (click)="setView(CalendarView.Month)"
+              [class.active]="view === CalendarView.Month"
+            >
+              Month
+            </div>
+            <div
+              class="btn btn-primary"
+              (click)="setView(CalendarView.Week)"
+              [class.active]="view === CalendarView.Week"
+            >
+              Week
+            </div>
+            <div
+              class="btn btn-primary"
+              (click)="setView(CalendarView.Day)"
+              [class.active]="view === CalendarView.Day"
+            >
+              Day
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div [ngSwitch]="view">
+        <mwl-calendar-month-view
+          *ngSwitchCase="CalendarView.Month"
+          [viewDate]="viewDate"
+          [events]="events"
+          [refresh]="refresh"
+          [activeDayIsOpen]="activeDayIsOpen"
+          (dayClicked)="dayClicked($event.day)"
+          (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)"
+        >
+        </mwl-calendar-month-view>
+        <mwl-calendar-week-view
+          *ngSwitchCase="CalendarView.Week"
+          [viewDate]="viewDate"
+          [events]="events"
+          [refresh]="refresh"
+          (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)"
+        >
+        </mwl-calendar-week-view>
+        <mwl-calendar-day-view
+          *ngSwitchCase="CalendarView.Day"
+          [viewDate]="viewDate"
+          [events]="events"
+          [refresh]="refresh"
+          (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)"
+        >
+        </mwl-calendar-day-view>
+      </div>
+      
+      <!-- Everything you see below is just for the demo, you don't need to include it in your app -->
+      
+      <br /><br /><br />
+     
+</div>

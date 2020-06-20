@@ -13,6 +13,6 @@ export class AppComponent {
   }
 
   irParaCadastroUsuario(){
-    this.router.navigate(['cadastro-usuario']);
+    //this.router.navigate(['cadastro-usuario']);
   }
 }
