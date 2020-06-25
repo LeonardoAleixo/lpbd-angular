@@ -1,85 +1,92 @@
-<button type="button" (click)="criarNovo();">Criar novo</button>
-<br>
-<div class="card-body" *ngIf="mostrarLista">
-    <!--
+<div style="width: 1024px;margin: 0 auto;">
+
+
+
+    <button class="uk-button uk-button-primary" (click)="criarNovo();" uk-toggle="target: #modal-close-default"
+        style="width: 200px;margin-top: 20px;;">Adicionar usuário</button>
+    <br>
+    <div class="card-body" *ngIf="mostrarLista">
+        <!--
         -- Alterado LPBD - Julio Rangel - 26/05/2019 
         -- Tabela para mostrar usuários já existentes no sistema
     -->
-    <div class="table-responsive">
-        <table class="table" id="customers">
-            <thead class="">
-                <th>
-                    Nome
-                </th>
-                <th>
-                    Sobrenome
-                </th>
-                <th>
-                    CPF
-                </th>
-                <th>
-                    Telefone
-                </th>
-                <th>
-                    Data de Nascimento
-                </th>
-            </thead>
-            <tbody style="cursor: pointer;">
-                <tr *ngFor="let u of listaUsuario;let i = index" (click)="buscarPorId(i)">
-                    <td>
-                        {{u.nome}}
-                    </td>
-                    <td>
-                        {{u.sobrenome}}
-                    </td>
-                    <td>
-                        {{u.cpf}}
-                    </td>
-                    <td>
-                        {{u.telefone}}
-                    </td>
-                    <td>
-                        {{u.dataNascimento | date: 'dd-MM-yyyy'}}
-                    </td>
+        <div class="table-responsive">
+            <table class="uk-table" id="customers">
+                <thead class="">
+                    <th>
+                        Nome
+                    </th>
+                    <th>
+                        Sobrenome
+                    </th>
+                    <th>
+                        CPF
+                    </th>
+                    <th>
+                        Telefone
+                    </th>
+                    <th>
+                        Data de Nascimento
+                    </th>
+                </thead>
+                <tbody style="cursor: pointer;">
+                    <tr *ngFor="let u of listaUsuario;let i = index" (click)="buscarPorId(i)">
+                        <td>
+                            {{u.nome}}
+                        </td>
+                        <td>
+                            {{u.sobrenome}}
+                        </td>
+                        <td>
+                            {{u.cpf}}
+                        </td>
+                        <td>
+                            {{u.telefone}}
+                        </td>
+                        <td>
+                            {{u.dataNascimento | date: 'dd-MM-yyyy'}}
+                        </td>
 
-                </tr>
-            </tbody>
-        </table>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 
-<!--
+    <!--
    -- Alterado LPBD - Renato Júnior - 27/05/2019 
    -- Formulário front-end para mostrar dados usuário e salvar/editar usuário.
 -->
-<div *ngIf="mostrarLista == false">
-    <div class="container">
-        <div class="row" style="margin: 0 auto;">
-            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
-                <label for="nome">Nome:</label><br>
-                <input type="text" id="nome" class="form-control" name="nome" [(ngModel)]="usuario.nome"><br>
-            </div>
-            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
-                <label for="sobrenome">Sobrenome:</label><br>
-                <input type="text" id="sobrenome" class="form-control" name="sobrenome"
-                    [(ngModel)]="usuario.sobrenome"><br>
-            </div>
-            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
-                <label for="cpf">CPF:</label><br>
-                <input type="text" id="cpf" class="form-control" name="cpf" [(ngModel)]="usuario.cpf"><br>
-            </div>
-            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
-                <label for="telefone">Telefone:</label><br>
-                <input type="text" id="telefone" class="form-control" name="telefone"
-                    [(ngModel)]="usuario.telefone"><br>
-            </div>
-            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
-                <label for="dataNascimento">Data de nascimento:</label><br>
-                <input type="date" id="dataNascimento" class="form-control" name="dataNascimento"
-                    [(ngModel)]="usuario.dataNascimento">
-            </div>
-            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
-                <button type="button" (click)="salvar();">Salvar</button>
+    <div *ngIf="mostrarLista == false">
+        <div class="container">
+            <div class="row" style="margin: 0 auto;">
+                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                    <label for="nome">Nome:</label><br>
+                    <input type="text" id="nome" class="form-control" name="nome" [(ngModel)]="usuario.nome"><br>
+                </div>
+                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                    <label for="sobrenome">Sobrenome:</label><br>
+                    <input type="text" id="sobrenome" class="form-control" name="sobrenome"
+                        [(ngModel)]="usuario.sobrenome"><br>
+                </div>
+                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                    <label for="cpf">CPF:</label><br>
+                    <input type="text" id="cpf" class="form-control" name="cpf" [(ngModel)]="usuario.cpf"><br>
+                </div>
+                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                    <label for="telefone">Telefone:</label><br>
+                    <input type="text" id="telefone" class="form-control" name="telefone"
+                        [(ngModel)]="usuario.telefone"><br>
+                </div>
+                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                    <label for="dataNascimento">Data de nascimento:</label><br>
+                    <input type="date" id="dataNascimento" class="form-control" name="dataNascimento"
+                        [(ngModel)]="usuario.dataNascimento">
+                </div>
+                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                    <button class="uk-button uk-button-primary" (click)="salvar();" uk-toggle="target: #modal-close-default"
+                    style="width: 200px;margin-top: 20px;;">Salvar</button>
+                </div>
             </div>
         </div>
     </div>
