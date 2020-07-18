@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CadastroUsuarioService } from '../services/cadastro-usuario.service';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -10,7 +12,8 @@ export class CadastroUsuarioComponent implements OnInit {
   listaUsuario:any = [];
   usuario:any;
   mostrarLista:boolean = true;
-  constructor(private cadastroUsuarioService:CadastroUsuarioService) {
+  constructor(private cadastroUsuarioService:CadastroUsuarioService,
+    private router:Router) {
     this.buscarTodos();
    }
 
@@ -29,6 +32,12 @@ export class CadastroUsuarioComponent implements OnInit {
     this.usuario = this.buildUsuario();
     this.mostrarLista = false;
   }
+
+  irParaTarefas(){
+    this.router.navigate(['tarefa']);
+  }
+
+
 
   buildUsuario(){
     let usuario  = {
