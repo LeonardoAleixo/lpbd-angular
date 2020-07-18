@@ -10,7 +10,7 @@ const routes: Routes = [
   * Alterado LPBD - Sandro Toline - 18/05/2019 
   * Dados para redirecionamento para o component de CadastroUsuario
   */
-  {path:'', component: AppComponent },
+  {path:'', component: CadastroUsuarioComponent },
   {path:'cadastro-usuario', component: CadastroUsuarioComponent },
   {path:'tarefa', component: TarefaComponent },
 ];
