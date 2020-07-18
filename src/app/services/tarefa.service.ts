@@ -28,6 +28,7 @@ export class TarefaService {
     this.utilService.buildHeaders());
   }
 
+  
   validarDados(obj):any{
     if (obj.titulo != null && obj.titulo != ""){
       if (obj.dataInicio != null && obj.dataInicio != undefined){
