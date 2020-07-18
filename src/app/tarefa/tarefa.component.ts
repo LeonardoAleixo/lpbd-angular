@@ -22,6 +22,8 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView,
 } from 'angular-calendar';
+import { Router } from '@angular/router';
+import { CadastroUsuarioService } from '../services/cadastro-usuario.service';
 
 const colors: any = {
   red: {
@@ -33,8 +35,8 @@ const colors: any = {
     secondary: '#D1E8FF',
   },
   yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
+    primary: 'green',
+    secondary: 'green',
   },
 };
 
@@ -47,6 +49,7 @@ export class TarefaComponent implements OnInit {
   listaTarefas: any = [];
   objectTarefa: any = null;
   modo = "calendar";
+  listaUsuario:any []; 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;
@@ -97,9 +100,11 @@ export class TarefaComponent implements OnInit {
   ];
 
   activeDayIsOpen: boolean = true;
-  constructor(private tarefaService: TarefaService, private modal: NgbModal) {
+  constructor(private tarefaService: TarefaService, private modal: NgbModal,
+    private router:Router, private usuarioService:CadastroUsuarioService) {
     this.buscarTarefaPorUsuario();
     this.buildObjectTarefa();
+    this.buscarUsuarios();
   }
 
   ngOnInit(): void {
@@ -113,11 +118,21 @@ export class TarefaComponent implements OnInit {
     }
   }
 
+  irParaUsuarios(){
+    this.router.navigate(['cadastro-usuario']);
+  }
+
 
   buscarTarefaPorUsuario() {
     this.tarefaService.buscarPorIdUser(1).subscribe((retorno: any) => {
       this.listaTarefas = retorno;
       this.convertToCalendar();
+    });
+  }
+
+  buscarUsuarios(){
+    this.usuarioService.buscarTodos().subscribe((retorno: any) => {
+      this.listaUsuario = retorno;
     });
   }
 
