@@ -11,7 +11,7 @@ import { HttpHeaders } from '@angular/common/http';
 * do basic auth para consumo de REST do Webservice Java
 */
 export class UtilService {
-   API_SERVER = "http://localhost:8080/lpbd/";
+  API_SERVER = "http://localhost:8080/lpbd/";
   //API_SERVER = "http://165.227.207.38:8080/lpbd/";
 
   constructor() { }

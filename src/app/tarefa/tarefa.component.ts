@@ -50,6 +50,7 @@ export class TarefaComponent implements OnInit {
   objectTarefa: any = null;
   modo = "calendar";
   listaUsuario:any []; 
+  usuarioFiltro:any;
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;
@@ -102,7 +103,7 @@ export class TarefaComponent implements OnInit {
   activeDayIsOpen: boolean = true;
   constructor(private tarefaService: TarefaService, private modal: NgbModal,
     private router:Router, private usuarioService:CadastroUsuarioService) {
-    this.buscarTarefaPorUsuario();
+    this.buscarTarefas();
     this.buildObjectTarefa();
     this.buscarUsuarios();
   }
@@ -124,7 +125,15 @@ export class TarefaComponent implements OnInit {
 
 
   buscarTarefaPorUsuario() {
-    this.tarefaService.buscarPorIdUser(1).subscribe((retorno: any) => {
+    alert(this.usuarioFiltro)
+    this.tarefaService.buscarPorIdUser(this.usuarioFiltro).subscribe((retorno: any) => {
+      this.listaTarefas = retorno;
+      this.convertToCalendar();
+    });
+  }
+
+  buscarTarefas(){
+    this.tarefaService.buscarTodos().subscribe((retorno: any) => {
       this.listaTarefas = retorno;
       this.convertToCalendar();
     });

@@ -6,8 +6,18 @@
   <button class="uk-button uk-button-primary" (click)="adicionarNovo();" uk-toggle="target: #modal-close-default"
     style="width: 200px;margin-top: 20px;;">Adicionar tarefa</button>
 
-    <button class="uk-button uk-button-primary" (click)="irParaUsuarios();"
+  <button class="uk-button uk-button-primary" (click)="irParaUsuarios();"
     style="width: 200px;margin-top: 20px;margin-left: 10px">Ir para usuários</button>
+
+    <div class="uk-width-1-2@s">
+      <label>Usuário</label>
+      <div class="uk-margin uk-form-small">
+        <select class="uk-select" [(ngModel)]="usuarioFiltro" (change)="buscarTarefaPorUsuario()">
+          <option [value]="c.id" *ngFor="let c of listaUsuario"> {{c.nome}}</option>
+        </select>
+      </div>
+    </div>
+
 
   <table class="uk-table">
     <caption>Lista de Tarefas</caption>
@@ -71,11 +81,11 @@
         </div>
       </div>
 
-       <div class="uk-width-1-2@s">
+      <div class="uk-width-1-2@s">
         <label>Usuário</label>
         <div class="uk-margin uk-form-small">
           <select class="uk-select" [(ngModel)]="objectTarefa.usuario">
-            <option value="u.id" *ngFor="let u of listaUsuario"> {{u.nome}}</option>
+            <option [value]="u.id" *ngFor="let u of listaUsuario"> {{u.nome}}</option>
           </select>
         </div>
       </div>
